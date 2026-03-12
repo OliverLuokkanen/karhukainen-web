@@ -39,7 +39,7 @@ const nextMatch: MatchItem = {
   home: "Karhukainen",
   away: "Vastustaja",
   dateLabel: "Perjantai 20.02. | klo 18.30",
-  href: "/ottelut-tulokset",
+  href: "/ottelut-ja-tulokset",
 };
 
 const mediaTiles = [
@@ -101,7 +101,7 @@ export default function HomePage() {
                 Katso joukkueet
               </Link>
               <Link
-                href="/ottelut-tulokset"
+                href="/ottelut-ja-tulokset"
                 className="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 ring-1 ring-white/10"
               >
                 Ottelut & tulokset
@@ -231,7 +231,7 @@ export default function HomePage() {
           <div className="grid gap-3 md:grid-cols-4">
             {[
               { label: "Joukkueet", href: "/joukkueet" },
-              { label: "Ottelut & tulokset", href: "/ottelut-tulokset" },
+              { label: "Ottelut & tulokset", href: "/ottelut-ja-tulokset" },
               { label: "Tapahtumat", href: "/tapahtumat" },
               { label: "Yhteystiedot", href: "/yhteystiedot" },
             ].map((l) => (

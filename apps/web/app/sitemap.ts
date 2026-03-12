@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { teams } from "../lib/teams";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
@@ -16,7 +17,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/yhteystiedot"
   ];
 
-  return routes.map((path) => ({
+  const teamRoutes = teams.map((t) => `/joukkueet/${t.slug}`);
+
+  return [...routes, ...teamRoutes].map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date()
   }));

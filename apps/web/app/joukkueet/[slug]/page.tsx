@@ -14,13 +14,14 @@ export default function TeamPage({ params }: { params: { slug: string } }) {
           {divisions[team.division].label}
         </div>
         <h1 className="text-3xl font-extrabold tracking-tight">{team.name}</h1>
+        <div className="text-lg font-medium text-slate-600">{team.nickname}</div>
         <p className="text-slate-600">
           {team.homeVenue ? `Kotihalli: ${team.homeVenue}` : ""}
         </p>
 
         <div className="pt-2">
           <Link
-            href="/ottelut-tulokset"
+            href="/ottelut-ja-tulokset"
             className="text-sm font-semibold text-blue-700 hover:text-blue-600"
           >
             Ottelut & tulokset →
