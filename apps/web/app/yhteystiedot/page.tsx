@@ -1,62 +1,144 @@
-﻿import { siteConfig } from "../../lib/siteConfig";
+import { PageHero } from "../../components/PageHero";
+import { SectionHeading } from "../../components/SectionHeading";
+import { siteConfig } from "../../lib/siteConfig";
 
 export default function YhteystiedotPage() {
   return (
-    <div className="space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-extrabold tracking-tight">Yhteystiedot</h1>
-        <p className="text-slate-600">Ota yhteyttä tai lähetä meille palautetta.</p>
-      </header>
+    <div>
+      <PageHero
+        title="Yhteystiedot"
+        subtitle="Ota yhteyttä tai lähetä meille palautetta."
+      />
 
-      <div className="grid gap-8 md:grid-cols-2">
-        {/* Yhteystiedot */}
-        <section className="space-y-4">
-          <h2 className="text-xl font-bold">Karhukainen ry</h2>
-          <div className="space-y-3 text-slate-700">
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Sähköposti</div>
-              <a className="text-sm underline hover:text-blue-700" href={`mailto:${siteConfig.email}`}>
-                {siteConfig.email}
-              </a>
+      <div className="mx-auto max-w-6xl px-4 py-16 space-y-16">
+        <div className="grid gap-12 md:grid-cols-2">
+          {/* Yhteystiedot-kortti */}
+          <section>
+            <SectionHeading title="Karhukainen ry" />
+            <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm space-y-5">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  Sähköposti
+                </div>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="mt-1 block text-base font-semibold text-[#0055A6] hover:underline"
+                >
+                  {siteConfig.email}
+                </a>
+              </div>
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  Instagram
+                </div>
+                <a
+                  href={siteConfig.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-1 block text-base font-semibold text-[#0055A6] hover:underline"
+                >
+                  @rbkarhukainen
+                </a>
+              </div>
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  Kotipaikka
+                </div>
+                <div className="mt-1 text-base text-slate-900">Oulu</div>
+              </div>
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  Perustettu
+                </div>
+                <div className="mt-1 text-base text-slate-900">{siteConfig.founded}</div>
+              </div>
             </div>
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Instagram</div>
-              <a
-                className="text-sm underline hover:text-blue-700"
-                href={siteConfig.instagramUrl}
-                target="_blank"
-                rel="noreferrer"
+          </section>
+
+          {/* Yhteydenottolomake (UI-only) */}
+          <section>
+            <SectionHeading title="Lähetä viesti" />
+            <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <div>
+                  <label className="mb-1 block text-sm font-semibold text-slate-700">
+                    Nimi *
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full rounded-lg border border-black/20 px-4 py-2.5 text-sm focus:border-[#0055A6] focus:outline-none focus:ring-2 focus:ring-[#0055A6]/20"
+                    placeholder="Etu- ja sukunimi"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-semibold text-slate-700">
+                    Sähköposti *
+                  </label>
+                  <input
+                    type="email"
+                    className="w-full rounded-lg border border-black/20 px-4 py-2.5 text-sm focus:border-[#0055A6] focus:outline-none focus:ring-2 focus:ring-[#0055A6]/20"
+                    placeholder="email@esimerkki.fi"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-semibold text-slate-700">
+                    Viesti *
+                  </label>
+                  <textarea
+                    rows={4}
+                    className="w-full rounded-lg border border-black/20 px-4 py-2.5 text-sm focus:border-[#0055A6] focus:outline-none focus:ring-2 focus:ring-[#0055A6]/20"
+                    placeholder="Kirjoita viestisi tähän..."
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full rounded-md py-3 text-sm font-bold text-[#001641] transition hover:brightness-110"
+                  style={{ backgroundColor: "#FCB53B" }}
+                >
+                  Lähetä viesti
+                </button>
+              </form>
+            </div>
+          </section>
+        </div>
+
+        {/* Palautelomake */}
+        <section>
+          <SectionHeading title="Anna palautetta" subtitle="Kehitämme toimintaamme palautteesi avulla." />
+          <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <div>
+                <label className="mb-1 block text-sm font-semibold text-slate-700">
+                  Palaute *
+                </label>
+                <textarea
+                  rows={4}
+                  className="w-full rounded-lg border border-black/20 px-4 py-2.5 text-sm focus:border-[#0055A6] focus:outline-none focus:ring-2 focus:ring-[#0055A6]/20"
+                  placeholder="Kirjoita palautteesi tähän..."
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm font-semibold text-slate-700">
+                  Sähköposti (valinnainen)
+                </label>
+                <input
+                  type="email"
+                  className="w-full rounded-lg border border-black/20 px-4 py-2.5 text-sm focus:border-[#0055A6] focus:outline-none focus:ring-2 focus:ring-[#0055A6]/20"
+                  placeholder="Jos haluat vastauksen"
+                />
+              </div>
+              <button
+                type="submit"
+                className="rounded-md px-6 py-2.5 text-sm font-bold text-[#001641] transition hover:brightness-110"
+                style={{ backgroundColor: "#FCB53B" }}
               >
-                @rbkarhukainen
-              </a>
-            </div>
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Kotipaikka</div>
-              <div className="text-sm">Oulu</div>
-            </div>
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Perustettu</div>
-              <div className="text-sm">{siteConfig.founded}</div>
-            </div>
-          </div>
-        </section>
-
-        {/* Yhteydenottolomake placeholder */}
-        <section className="space-y-3">
-          <h2 className="text-xl font-bold">Lähetä viesti</h2>
-          <div className="rounded-xl border border-dashed border-black/20 bg-slate-50 p-6 text-sm text-slate-600">
-            Yhteydenottolomake tulossa.
+                Lähetä palaute
+              </button>
+            </form>
           </div>
         </section>
       </div>
-
-      {/* Palautelomake placeholder */}
-      <section className="space-y-3">
-        <h2 className="text-xl font-bold">Anna palautetta</h2>
-        <div className="rounded-xl border border-dashed border-black/20 bg-slate-50 p-6 text-sm text-slate-600">
-          Palautelomake tulossa.
-        </div>
-      </section>
     </div>
   );
 }
+
