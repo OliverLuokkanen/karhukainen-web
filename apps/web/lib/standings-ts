@@ -1,0 +1,17 @@
+export type StandingRow = {
+  position: number;
+  team: string;
+  played: number;
+  wins: number;
+  draws?: number;
+  losses: number;
+  goalsFor?: number;
+  goalsAgainst?: number;
+  points: number;
+};
+
+export const standings: StandingRow[] = [
+  { position: 1, team: "Joukkue A", played: 10, wins: 8, draws: 1, losses: 1, points: 25 },
+  { position: 2, team: "Karhukainen", played: 10, wins: 7, draws: 1, losses: 2, points: 22 },
+  { position: 3, team: "Joukkue C", played: 10, wins: 6, draws: 1, losses: 3, points: 19 },
+];

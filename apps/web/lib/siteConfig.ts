@@ -8,10 +8,10 @@ export const siteConfig = {
     url: "https://kaukis.torneopal.fi/taso/sarja.php?turnaus=ou2025&sarja=1DIV"
   },
   teams: [
-    { name: "Joukkue 1", slug: "joukkue-1" },
-    { name: "Joukkue 2", slug: "joukkue-2" },
-    { name: "Joukkue 3", slug: "joukkue-3" },
-    { name: "Joukkue 4", slug: "joukkue-4" },
-    { name: "Joukkue 5", slug: "joukkue-5" }
+    { name: "Vesikarhut", slug: "joukkue-1" },
+    { name: "Waterbears", slug: "joukkue-2" },
+    { name: "Tardigrades", slug: "joukkue-3" },
+    { name: "Merokensis", slug: "joukkue-4" },
+    { name: "Likokuhnurit", slug: "joukkue-5" }
   ]
 } as const;
