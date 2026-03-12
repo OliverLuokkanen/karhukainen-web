@@ -28,7 +28,8 @@ export default function TeamsPage() {
                 className="rounded-xl border border-black/10 bg-white p-5 shadow-sm hover:shadow-md transition"
               >
                 <div className="text-lg font-bold">{t.name}</div>
-                <div className="mt-1 text-sm text-slate-600">
+                <div className="mt-1 text-sm font-medium text-slate-700">{t.nickname}</div>
+                <div className="mt-1 text-sm text-slate-500">
                   {divisions[t.division].label}
                   {t.homeVenue ? ` • ${t.homeVenue}` : ""}
                 </div>

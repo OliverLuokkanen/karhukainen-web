@@ -26,7 +26,7 @@ export default function MatchesAndResultsPage({
         {(["1div", "2div"] as const).map((d) => (
           <Link
             key={d}
-            href={`/ottelut-tulokset?division=${d}`}
+            href={`/ottelut-ja-tulokset?division=${d}`}
             className={`rounded-md px-3 py-2 text-sm font-semibold ring-1 transition ${
               d === activeDivision ? "bg-blue-600 text-white ring-blue-600" : "bg-white text-slate-900 ring-black/10 hover:bg-slate-50"
             }`}
@@ -59,7 +59,7 @@ export default function MatchesAndResultsPage({
             {teams.map((t) => (
               <Link
                 key={t.slug}
-                href={`/ottelut-tulokset?team=${encodeURIComponent(t.slug)}&division=${activeDivision}`}
+                href={`/ottelut-ja-tulokset?team=${encodeURIComponent(t.slug)}&division=${activeDivision}`}
                 className={`rounded-md px-3 py-2 text-sm font-semibold ring-1 transition ${
                   t.slug === selected.slug ? "bg-blue-600 text-white ring-blue-600" : "bg-white text-slate-900 ring-black/10 hover:bg-slate-50"
                 }`}
