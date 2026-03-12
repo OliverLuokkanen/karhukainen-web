@@ -1,4 +1,6 @@
-﻿import Link from "next/link";
+import Link from "next/link";
+import { PageHero } from "../../components/PageHero";
+import { SectionHeading } from "../../components/SectionHeading";
 import { divisions, teams } from "../../lib/teams";
 
 export default function TeamsPage() {
@@ -11,34 +13,51 @@ export default function TeamsPage() {
   );
 
   return (
-    <div className="space-y-10">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-extrabold tracking-tight">Joukkueet</h1>
-        <p className="text-slate-600">Valitse joukkue ja katso tulevat ottelut ja tulokset.</p>
-      </header>
+    <div>
+      <PageHero
+        title="Joukkueet"
+        subtitle="Karhukainen ry:n viisi joukkuetta kahdessa divisioonassa."
+      />
 
-      {(Object.keys(byDivision) as Array<keyof typeof byDivision>).map((div) => (
-        <section key={div} className="space-y-4">
-          <h2 className="text-xl font-bold">{divisions[div].label}</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            {byDivision[div].map((t) => (
-              <Link
-                key={t.slug}
-                href={`/joukkueet/${t.slug}`}
-                className="rounded-xl border border-black/10 bg-white p-5 shadow-sm hover:shadow-md transition"
-              >
-                <div className="text-lg font-bold">{t.name}</div>
-                <div className="mt-1 text-sm font-medium text-slate-700">{t.nickname}</div>
-                <div className="mt-1 text-sm text-slate-500">
-                  {divisions[t.division].label}
-                  {t.homeVenue ? ` • ${t.homeVenue}` : ""}
-                </div>
-                <div className="mt-4 text-sm font-semibold text-blue-700">Avaa →</div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      ))}
+      <div className="mx-auto max-w-6xl px-4 py-16 space-y-16">
+        {(Object.keys(byDivision) as Array<keyof typeof byDivision>).map((div) => (
+          <section key={div}>
+            <SectionHeading title={divisions[div].label} />
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {byDivision[div].map((t) => (
+                <Link
+                  key={t.slug}
+                  href={`/joukkueet/${t.slug}`}
+                  className="group overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm transition hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  <div
+                    className="h-32 w-full"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #001641 0%, #0055A6 100%)",
+                    }}
+                  />
+                  <div className="p-5">
+                    <div className="text-lg font-extrabold text-slate-900 group-hover:text-[#0055A6] transition-colors">
+                      {t.name}
+                    </div>
+                    <div className="mt-1 text-base font-semibold text-[#FCB53B]">
+                      {t.nickname}
+                    </div>
+                    <div className="mt-1 text-sm text-slate-500">
+                      {divisions[t.division].label}
+                      {t.homeVenue ? ` • ${t.homeVenue}` : ""}
+                    </div>
+                    <div className="mt-4 text-sm font-semibold text-[#0055A6]">
+                      Avaa joukkuesivu →
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
   );
 }
