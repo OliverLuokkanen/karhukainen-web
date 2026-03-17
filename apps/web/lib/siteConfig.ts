@@ -9,11 +9,11 @@ export const siteConfig = {
     url: "https://kaukis.torneopal.fi/taso/sarja.php?turnaus=ou2025&sarja=1DIV"
   },
   teams: [
-    { name: "Karhukainen I", nickname: "RBK-Tardigrades", division: "1.div", slug: "karhukainen-i" },
-    { name: "Karhukainen II", nickname: "RBK-Waterbears", division: "1.div", slug: "karhukainen-ii" },
-    { name: "Karhukainen III", nickname: "RBK-Vesikarhut", division: "1.div", slug: "karhukainen-iii" },
-    { name: "Karhukainen IV", nickname: "RBK-Likokuhnurit", division: "2.div", slug: "karhukainen-iv" },
-    { name: "Karhukainen V", nickname: "RBK-Merokensis", division: "2.div", slug: "karhukainen-v" },
+    { name: "Tardigrades", division: "1.div", slug: "tardigrades", managerName: "Petri Luokkanen" },
+    { name: "Waterbears", division: "1.div", slug: "waterbears", managerName: "Jere Karttunen" },
+    { name: "Vesikarhut", division: "1.div", slug: "vesikarhut", managerName: "Hannu Kaikkonen" },
+    { name: "Likokuhnurit", division: "2.div", slug: "likokuhnurit", managerName: "Esa-matti Lauhikari" },
+    { name: "Merokensis", division: "2.div", slug: "merokensis", managerName: "Mikkal Puominen" },
   ],
   membershipTypes: ["Aikuisjäsen", "Juniorijäsen", "Kannatusjäsen", "Seniori", "Kunniajäsen"],
 } as const;
