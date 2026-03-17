@@ -1,15 +1,6 @@
-import Link from "next/link";
 import { PageHero } from "../../components/PageHero";
 import { SectionHeading } from "../../components/SectionHeading";
 import { siteConfig } from "../../lib/siteConfig";
-
-const boardMembers = [
-  { name: "Puheenjohtaja", role: "Hallituksen puheenjohtaja" },
-  { name: "Varapuheenjohtaja", role: "Varapuheenjohtaja" },
-  { name: "Sihteeri", role: "Sihteeri" },
-  { name: "Rahastonhoitaja", role: "Rahastonhoitaja" },
-  { name: "Hallituksen jäsen", role: "Jäsen" },
-];
 
 const values = [
   {
@@ -22,16 +13,16 @@ const values = [
   },
   {
     title: "Kaikki mukaan",
-    desc: "Toimintamme kantava ajatus on ottaa kaikki mukaan sellaisena kuin olemme.",
+    desc: "Toimintamme kantava ajatus on ottaa kaikki mukaan ja osallistua tosissaan, muttei tosikkona.",
   },
 ];
 
-const membershipTypes = [
-  { type: "Aikuisjäsen", price: "– €/vuosi", desc: "Täysivaltainen jäsenyys" },
-  { type: "Juniorijäsen", price: "– €/vuosi", desc: "Alle 18-vuotiaille" },
-  { type: "Kannatusjäsen", price: "– €/vuosi", desc: "Tue seuran toimintaa" },
-  { type: "Seniori", price: "– €/vuosi", desc: "Yli 65-vuotiaille" },
-  { type: "Kunniajäsen", price: "–", desc: "Hallituksen myöntämä" },
+const teamManagers: { team: string; manager: string }[] = [
+  { team: "Tardigrades", manager: "Petri Luokkanen" },
+  { team: "Vesikarhut", manager: "Hannu Kaikkonen" },
+  { team: "Waterbears", manager: "Jere Karttunen" },
+  { team: "Likokuhnurit", manager: "Esa-matti Lauhikari" },
+  { team: "Merokensis", manager: "Mikkal Puominen" },
 ];
 
 export default function SeuraPage() {
@@ -39,7 +30,7 @@ export default function SeuraPage() {
     <div>
       <PageHero
         title="Seura"
-        subtitle="Tervetuloa tutustumaan RB Karhukaiseen – oululaiseen kaukalopalloperheeseen."
+        subtitle="Tervetuloa tutustumaan Karhukaiseen – oululaiseen kaukalopalloperheeseen."
       />
 
       <div className="mx-auto max-w-6xl px-4 py-16 space-y-20">
@@ -49,23 +40,22 @@ export default function SeuraPage() {
           <div className="grid gap-8 md:grid-cols-2">
             <div className="space-y-4 text-slate-700 leading-relaxed">
               <p>
-                <strong>Karhukainen ry</strong> on urheiluseura, jonka tarkoituksena on edistää
-                toiminnallista urheilua ja liikuntaa kaiken ikäisille. Seura on perustettu vuonna{" "}
-                {siteConfig.founded} Oulussa.
+                <strong>Karhukainen ry</strong> on vuonna {siteConfig.founded} perustettu
+                oululainen kaukalopalloseura, jonka tarkoituksena on edistää toiminnallista
+                urheilua ja liikuntaa kaiken ikäisille sekä siihen liittyvää kansalaistoimintaa.
               </p>
               <p>
-                Seuramme tunnetaan positiivisesta asenteesta ja kulttuurista sekä
-                ennakkoluulottomasta ja eteenpäin suuntautuvasta toimintatavastaan. Toimintamme
-                kantava ajatus on ottaa kaikki mukaan ja osallistua{" "}
-                <em>&ldquo;{siteConfig.slogan}&rdquo;</em> sellaisena kuin olemme.
-              </p>
-              <p>
-                Seuralla on viisi joukkuetta kahdessa eri divisioonassa, ja toiminta kattaa niin
-                kilpailullisen pelaamisen kuin matalan kynnyksen harrastamisen.
+                Seuramme toimii mottona{" "}
+                <em>&ldquo;{siteConfig.slogan}&rdquo;</em> – osallistumme tosissaan, muttei
+                tosikkona, ja kaikki ovat tervetulleita mukaan sellaisina kuin ovat.
               </p>
             </div>
             <div className="rounded-2xl border border-black/10 bg-slate-50 p-6">
               <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="font-semibold text-slate-600">Virallinen nimi</span>
+                  <span className="text-slate-900">Karhukainen Ry</span>
+                </div>
                 <div className="flex justify-between">
                   <span className="font-semibold text-slate-600">Perustettu</span>
                   <span className="text-slate-900">{siteConfig.founded}</span>
@@ -80,7 +70,7 @@ export default function SeuraPage() {
                 </div>
                 <div className="flex justify-between">
                   <span className="font-semibold text-slate-600">Joukkueet</span>
-                  <span className="text-slate-900">5 joukkuetta</span>
+                  <span className="text-slate-900">{siteConfig.teams.length} joukkuetta</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-semibold text-slate-600">Sähköposti</span>
@@ -116,61 +106,58 @@ export default function SeuraPage() {
           </div>
         </section>
 
-        {/* Hallitus */}
+        {/* Toiminnan tarkoitus */}
         <section>
-          <SectionHeading title="Hallitus" subtitle="Seuran toiminnasta vastaavat henkilöt" />
+          <SectionHeading title="Toiminnan tarkoitus" subtitle="Miksi olemme olemassa" />
+          <div className="rounded-2xl border border-black/10 bg-slate-50 p-8">
+            <p className="text-slate-700 leading-relaxed">
+              Karhukainen ry:n tarkoituksena on edistää toiminnallista urheilua ja liikuntaa
+              kaiken ikäisille sekä siihen liittyvää kansalaistoimintaa. Haluamme tarjota
+              matalan kynnyksen mahdollisuuden osallistua kaukalopalloon – niin kilpailullisesti
+              kuin harrastepohjaisesti.
+            </p>
+          </div>
+        </section>
+
+        {/* Joukkuevastaavat */}
+        <section>
+          <SectionHeading
+            title="Joukkuevastaavat"
+            subtitle="Joukkueiden yhteyshenkilöt"
+          />
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            {boardMembers.map((m) => (
+            {teamManagers.map((m) => (
               <div
-                key={m.role}
+                key={m.team}
                 className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm text-center"
               >
                 <div
-                  className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full text-white font-bold text-xl"
+                  className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full text-white font-bold text-lg"
                   style={{ backgroundColor: "#001641" }}
                 >
-                  ?
+                  {m.manager.charAt(0)}
                 </div>
-                <div className="text-sm font-bold text-slate-900">{m.name}</div>
-                <div className="mt-1 text-xs text-slate-500">{m.role}</div>
+                <div className="text-sm font-bold text-slate-900">{m.manager}</div>
+                <div className="mt-1 text-xs text-slate-500">{m.team}</div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Jäseneksi liittyminen */}
+        {/* Ota yhteyttä */}
         <section>
-          <SectionHeading title="Jäseneksi liittyminen" subtitle="Tervetuloa mukaan RB Karhukaiseen!" />
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            {membershipTypes.map((m) => (
-              <div
-                key={m.type}
-                className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm text-center"
-              >
-                <div className="text-base font-bold text-slate-900">{m.type}</div>
-                <div className="mt-1 text-lg font-extrabold" style={{ color: "#0055A6" }}>
-                  {m.price}
-                </div>
-                <div className="mt-1 text-xs text-slate-500">{m.desc}</div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <SectionHeading title="Ota yhteyttä" subtitle="Ollaan yhteyksissä" />
+          <div className="rounded-2xl border border-black/10 bg-white p-8 shadow-sm text-center">
+            <p className="mb-4 text-slate-600">
+              Kysymyksiä seurasta tai toiminnasta? Ota rohkeasti yhteyttä sähköpostilla.
+            </p>
             <a
-              href="https://www.suomisport.fi"
-              target="_blank"
-              rel="noreferrer"
+              href={`mailto:${siteConfig.email}`}
               className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-bold text-[#001641] transition hover:brightness-110"
               style={{ backgroundColor: "#FCB53B" }}
             >
-              Liity jäseneksi SuomiSportissa →
+              {siteConfig.email}
             </a>
-            <Link
-              href="/yhteystiedot"
-              className="inline-flex items-center justify-center rounded-md border border-black/20 px-6 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-50"
-            >
-              Kysy lisää
-            </Link>
           </div>
         </section>
       </div>
