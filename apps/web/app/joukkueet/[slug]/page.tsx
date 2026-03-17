@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import { divisions, teams } from "../../../lib/teams";
 import { TorneopalWidget } from "../../../components/TorneopalWidget";
