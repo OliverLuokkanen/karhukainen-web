@@ -41,12 +41,11 @@ export default function TeamsPage() {
                     <div className="text-lg font-extrabold text-slate-900 group-hover:text-[#0055A6] transition-colors">
                       {t.name}
                     </div>
-                    <div className="mt-1 text-base font-semibold text-[#FCB53B]">
-                      {t.nickname}
-                    </div>
                     <div className="mt-1 text-sm text-slate-500">
                       {divisions[t.division].label}
-                      {t.homeVenue ? ` • ${t.homeVenue}` : ""}
+                    </div>
+                    <div className="mt-2 text-sm text-slate-700">
+                      <span className="font-semibold">Joukkuevastaava:</span> {t.managerName}
                     </div>
                     <div className="mt-4 text-sm font-semibold text-[#0055A6]">
                       Avaa joukkuesivu →
