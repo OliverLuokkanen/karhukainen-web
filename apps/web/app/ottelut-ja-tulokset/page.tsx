@@ -6,11 +6,11 @@ import { PageHero } from "../../components/PageHero";
 import { SectionHeading } from "../../components/SectionHeading";
 
 const placeholderMatches = [
-  { date: "Pe 20.2.2026", time: "18:30", home: "Karhukainen I", away: "Oulu Eagles", result: "–", venue: "Ouluhalli" },
-  { date: "La 21.2.2026", time: "14:00", home: "Karhukainen II", away: "Kärpät 2", result: "–", venue: "Raksila" },
-  { date: "La 21.2.2026", time: "16:30", home: "Haukipudas HK", away: "Karhukainen III", result: "–", venue: "Haukipudas-halli" },
-  { date: "Su 22.2.2026", time: "12:00", home: "Karhukainen IV", away: "OLS", result: "–", venue: "Ouluhalli" },
-  { date: "Su 22.2.2026", time: "14:30", home: "Karhukainen V", away: "Nallikari FC", result: "–", venue: "Ouluhalli" },
+  { date: "Pe 20.2.2026", time: "18:30", home: "Tardigrades", away: "Oulu Eagles", result: "–", venue: "Ouluhalli" },
+  { date: "La 21.2.2026", time: "14:00", home: "Waterbears", away: "Kärpät 2", result: "–", venue: "Raksila" },
+  { date: "La 21.2.2026", time: "16:30", home: "Haukipudas HK", away: "Vesikarhut", result: "–", venue: "Haukipudas-halli" },
+  { date: "Su 22.2.2026", time: "12:00", home: "Likokuhnurit", away: "OLS", result: "–", venue: "Ouluhalli" },
+  { date: "Su 22.2.2026", time: "14:30", home: "Merokensis", away: "Nallikari FC", result: "–", venue: "Ouluhalli" },
 ];
 
 export default function MatchesAndResultsPage({

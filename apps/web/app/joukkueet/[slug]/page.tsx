@@ -3,22 +3,13 @@ import Link from "next/link";
 import { divisions, teams } from "../../../lib/teams";
 import { TorneopalWidget } from "../../../components/TorneopalWidget";
 
-const placeholderPlayers = [
-  { number: 1, name: "Pelaaja 1", role: "Maalivahti" },
-  { number: 3, name: "Pelaaja 2", role: "Puolustaja" },
-  { number: 5, name: "Pelaaja 3", role: "Puolustaja" },
-  { number: 7, name: "Pelaaja 4", role: "Hyökkääjä" },
-  { number: 9, name: "Pelaaja 5", role: "Hyökkääjä" },
-  { number: 11, name: "Pelaaja 6", role: "Hyökkääjä" },
-  { number: 13, name: "Pelaaja 7", role: "Puolustaja" },
-  { number: 15, name: "Pelaaja 8", role: "Hyökkääjä" },
-  { number: 17, name: "Pelaaja 9", role: "Hyökkääjä" },
-  { number: 21, name: "Pelaaja 10", role: "Puolustaja" },
-];
-
 export default function TeamPage({ params }: { params: { slug: string } }) {
   const team = teams.find((t) => t.slug === params.slug);
   if (!team) return notFound();
+
+  const torneopalUrl = team.torneopalTeamId
+    ? `https://kaukis.torneopal.fi/taso/sarja.php?turnaus=ou2025&joukkue=${team.torneopalTeamId}`
+    : "https://kaukis.torneopal.fi/taso/sarja.php?turnaus=ou2025&sarja=1DIV";
 
   return (
     <div>
@@ -39,10 +30,6 @@ export default function TeamPage({ params }: { params: { slug: string } }) {
           <h1 className="text-4xl font-extrabold tracking-tight text-white md:text-5xl">
             {team.name}
           </h1>
-          <p className="mt-2 text-xl font-semibold text-white/70">{team.nickname}</p>
-          {team.homeVenue && (
-            <p className="mt-2 text-sm text-white/50">Kotihalli: {team.homeVenue}</p>
-          )}
           <Link
             href="/joukkueet"
             className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-white/60 hover:text-white transition-colors"
@@ -53,72 +40,74 @@ export default function TeamPage({ params }: { params: { slug: string } }) {
       </section>
 
       <div className="mx-auto max-w-6xl px-4 py-16 space-y-16">
-        {/* Pelaajat */}
+        {/* Perustiedot */}
         <section>
-          <div className="mb-8">
-            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">
-              Pelaajat
-            </h2>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {placeholderPlayers.map((p) => (
-              <div
-                key={p.number}
-                className="rounded-2xl border border-black/10 bg-white p-4 shadow-sm text-center"
+          <h2 className="mb-6 text-2xl font-extrabold tracking-tight text-slate-900">
+            Perustiedot
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm">
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Divisioona</div>
+              <div className="mt-1 text-base font-bold text-slate-900">{divisions[team.division].label}</div>
+            </div>
+            <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm">
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Joukkuevastaava</div>
+              <div className="mt-1 text-base font-bold text-slate-900">{team.managerName}</div>
+            </div>
+            <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm">
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Sijoitus</div>
+              <div className="mt-1 text-sm text-slate-500">Haetaan Torneopallosta</div>
+              <a
+                href={torneopalUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-[#0055A6] hover:underline"
               >
-                <div
-                  className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full text-white font-black text-lg"
-                  style={{ backgroundColor: "#001641" }}
-                >
-                  #{p.number}
-                </div>
-                <div className="text-sm font-bold text-slate-900">{p.name}</div>
-                <div className="mt-1 text-xs text-slate-500">{p.role}</div>
-              </div>
-            ))}
+                Avaa Torneopallo →
+              </a>
+            </div>
+            <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm">
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Tulevat ottelut</div>
+              <div className="mt-1 text-sm text-slate-500">Haetaan Torneopallosta</div>
+              <a
+                href={torneopalUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-[#0055A6] hover:underline"
+              >
+                Avaa Torneopallo →
+              </a>
+            </div>
           </div>
         </section>
 
-        {/* Joukkueen johto */}
-        <section>
-          <div className="mb-8">
-            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">
-              Joukkueen johto
-            </h2>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              { role: "Päävalmentaja", name: "Valmentaja" },
-              { role: "Joukkueenjohtaja", name: "Johtaja" },
-              { role: "Apuvalmentaja", name: "Apuvalmentaja" },
-            ].map((m) => (
-              <div
-                key={m.role}
-                className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm"
-              >
-                <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  {m.role}
-                </div>
-                <div className="mt-1 text-base font-bold text-slate-900">{m.name}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Otteluohjelma */}
-        <section>
-          <div className="mb-8">
-            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">
+        {/* Otteluohjelma (widget) */}
+        {team.torneopalTeamId && (
+          <section>
+            <h2 className="mb-6 text-2xl font-extrabold tracking-tight text-slate-900">
               Otteluohjelma
             </h2>
-          </div>
-          {!team.torneopalTeamId ? (
-            <div className="rounded-xl border border-dashed border-black/20 bg-white p-5 text-sm text-slate-600">
-              Torneopal teamId puuttuu tälle joukkueelle.
-            </div>
-          ) : (
             <TorneopalWidget teamId={team.torneopalTeamId} widget="schedule" />
-          )}
+          </section>
+        )}
+
+        {/* Pelaajat */}
+        <section>
+          <h2 className="mb-6 text-2xl font-extrabold tracking-tight text-slate-900">
+            Pelaajat
+          </h2>
+          <div className="rounded-2xl border border-dashed border-black/20 bg-white p-8 shadow-sm text-center">
+            <p className="text-slate-600">Pelaajatiedot lisätään myöhemmin.</p>
+            <a
+              href={torneopalUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-1 rounded-md px-5 py-2.5 text-sm font-bold text-white transition hover:brightness-110"
+              style={{ backgroundColor: "#0055A6" }}
+            >
+              Avaa Torneopallo →
+            </a>
+          </div>
         </section>
       </div>
     </div>
